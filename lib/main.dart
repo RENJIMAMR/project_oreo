@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:project_oreo/view/splash_screen/splash_screen.dart';
 
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
   runApp(MyApp());
+  Hive.initFlutter();
+  var box = await Hive.openBox('productBox');
 }
 
 class MyApp extends StatelessWidget {
