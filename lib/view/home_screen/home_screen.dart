@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
-import 'package:project_oreo/view/home_screen/widgets/raw_card.dart';
+import 'package:project_oreo/view/filtering_screen/filtering_screen.dart';
+import 'package:project_oreo/view/home_screen/widgets/recent_row_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -120,42 +121,51 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     width: 15,
                   ),
-                  Container(
-                    height: 180,
-                    width: 160,
-                    decoration: BoxDecoration(
-                        color: ColorConstants.blueMain.withOpacity(.08),
-                        borderRadius: BorderRadius.circular(26)),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                color: ColorConstants.cyan,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Image.asset(
-                                ImageConstants.viewall,
-                                height: 40,
-                                width: 40,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FilteringScreen(),
+                          ));
+                    },
+                    child: Container(
+                      height: 180,
+                      width: 160,
+                      decoration: BoxDecoration(
+                          color: ColorConstants.blueMain.withOpacity(.08),
+                          borderRadius: BorderRadius.circular(26)),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                  color: ColorConstants.cyan,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Image.asset(
+                                  ImageConstants.viewall,
+                                  height: 40,
+                                  width: 40,
+                                ),
                               ),
                             ),
-                          ),
-                          Text(
-                            'View All',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            'Checkouts 0',
-                            style: TextStyle(
-                                fontSize: 15, color: ColorConstants.greyMain),
-                          ),
-                        ],
+                            Text(
+                              'View All',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              'Checkouts 0',
+                              style: TextStyle(
+                                  fontSize: 15, color: ColorConstants.greyMain),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -180,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ListView.separated(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => RawCard(),
+                  itemBuilder: (context, index) => RecentRawCard(),
                   separatorBuilder: (context, index) => SizedBox(
                         height: 20,
                       ),

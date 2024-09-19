@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 
-class RawCard extends StatelessWidget {
-  const RawCard({super.key});
+class RecentRawCard extends StatelessWidget {
+  const RecentRawCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class RawCard extends StatelessWidget {
       padding: EdgeInsets.all(12),
       height: 80,
       decoration: BoxDecoration(
-          color: ColorConstants.whiteMain,
+          color: ColorConstants.containergrey,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
