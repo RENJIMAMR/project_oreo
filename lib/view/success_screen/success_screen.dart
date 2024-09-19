@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
+import 'package:project_oreo/view/home_screen/home_screen.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key});
@@ -44,21 +45,32 @@ class SuccessScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: Container(
-                      height: 50,
-                      // width: 175,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                              image: AssetImage(ImageConstants.loginBg),
-                              fit: BoxFit.cover)),
-                      child: Center(
-                        child: Text(
-                          'Back to home',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: ColorConstants.whiteMain),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(),
+                          ),
+                          (route) => false,
+                        );
+                      },
+                      child: Container(
+                        height: 50,
+                        // width: 175,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                                image: AssetImage(ImageConstants.loginBg),
+                                fit: BoxFit.cover)),
+                        child: Center(
+                          child: Text(
+                            'Back to home',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: ColorConstants.whiteMain),
+                          ),
                         ),
                       ),
                     ),
@@ -66,12 +78,23 @@ class SuccessScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    'Add more',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: ColorConstants.blueMain),
+                  InkWell(
+                    //  onTap: () {
+                    //     Navigator.pushAndRemoveUntil(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => (),
+                    //       ),
+                    //       (route) => false,
+                    //     );
+                    //   },
+                    child: Text(
+                      'Add more',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: ColorConstants.blueMain),
+                    ),
                   ),
                 ],
               ),
