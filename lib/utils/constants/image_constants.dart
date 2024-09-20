@@ -10,4 +10,11 @@ class ImageConstants {
   static String flour = 'assets/asset_image/flour.png';
   static String sugar = 'assets/asset_image/sugar.png';
   static String addItem = 'assets/asset_image/itemAdding.png';
+  static String profilePic = 'assets/asset_image/profile_pic.jpeg';
+  static String person = 'assets/asset_image/person.png';
+  static String fav = 'assets/asset_image/fav.png';
+  static String lock = 'assets/asset_image/lock.png';
+  static String bell = 'assets/asset_image/bell.png';
+  static String protection = 'assets/asset_image/twofactor.png';
+  static String logout = 'assets/asset_image/logout.png';
 }

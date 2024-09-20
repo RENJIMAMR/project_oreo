@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
+import 'package:project_oreo/view/bottom_nav_bar_screen/bottom_nav_bar_screen.dart';
 import 'package:project_oreo/view/home_screen/home_screen.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -50,7 +51,7 @@ class SuccessScreen extends StatelessWidget {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomeScreen(),
+                            builder: (context) => BottomNavBarScreen(),
                           ),
                           (route) => false,
                         );

@@ -3,7 +3,7 @@ import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
 import 'package:project_oreo/view/add_item_screen/add_item_screen.dart';
 import 'package:project_oreo/view/home_screen/home_screen.dart';
-import 'package:project_oreo/view/settings_screen/settings_screen.dart';
+import 'package:project_oreo/view/profile_screen/profile_screen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
   const BottomNavBarScreen({super.key});
@@ -14,7 +14,7 @@ class BottomNavBarScreen extends StatefulWidget {
 
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int selectedIndex = 0;
-  List<Widget> myScreens = [HomeScreen(), AddItemScreen(), SettingsScreen()];
+  List<Widget> myScreens = [HomeScreen(), AddItemScreen(), ProfileScreen()];
 
   @override
   Widget build(BuildContext context) {

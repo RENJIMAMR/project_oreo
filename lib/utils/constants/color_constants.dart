@@ -5,7 +5,7 @@ class ColorConstants {
   static Color blackMain = Color(0xff424242);
   static Color whiteMain = Color(0xffFFFFFF);
 
-  static Color greyMain = Colors.grey;
+  static Color greyMain = Color(0xffABABAB);
   static Color blue = Colors.blue;
   static Color blueMain = Color(0xff2946AC);
   static Color amber = Colors.amber;

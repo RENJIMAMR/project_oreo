@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Image.asset(
                 ImageConstants.loginOreo,
-                height: 60,
+                height: 50,
               ),
               SizedBox(
                 height: 15,
