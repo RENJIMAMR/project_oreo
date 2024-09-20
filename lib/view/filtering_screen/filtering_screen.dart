@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
+import 'package:project_oreo/view/filtering_screen/tabs/productstab.dart';
+import 'package:project_oreo/view/filtering_screen/tabs/raw_materialtab.dart';
 import 'package:project_oreo/view/filtering_screen/widget/quantity_row_card.dart';
 import 'package:project_oreo/view/summary_screen/summary_screen.dart';
 
@@ -14,6 +16,7 @@ class FilteringScreen extends StatefulWidget {
 class _FilteringScreenState extends State<FilteringScreen> {
   bool isSelected = false; //to change bg of product and raw materials
   bool isnotSelected = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,159 +35,45 @@ class _FilteringScreenState extends State<FilteringScreen> {
             SizedBox(
               height: 20,
             ),
-            Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      isSelected = true;
-                      isnotSelected = false;
-                    });
-                  },
-                  child: isSelected
-                      ? Expanded(
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                    image: AssetImage(ImageConstants.loginBg),
-                                    fit: BoxFit.cover)),
-                            child: Center(
-                              child: Text(
-                                'Product',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: ColorConstants.whiteMain),
-                              ),
-                            ),
-                          ),
-                        )
-                      : Expanded(
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      1, 2), // changes position of shadow
-                                ),
-                              ],
-                              color: ColorConstants.whiteMain,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Product ',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: ColorConstants.blackMain),
-                              ),
-                            ),
-                          ),
+            DefaultTabController(
+              length: 2,
+              child: Column(
+                children: [
+                  TabBar(
+                    labelColor: ColorConstants.blackMain,
+                    indicatorColor: ColorConstants.blackMain,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    tabs: [
+                      Text(
+                        'Products',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                  child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          isnotSelected = false;
-                        });
-                      },
-                      child: isnotSelected
-                          ? Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: ColorConstants.whiteMain,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        1, 2), // changes position of shadow
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Raw materials',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: ColorConstants.blackMain),
-                                ),
-                              ),
-                            )
-                          : Expanded(
-                              child: Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    image: DecorationImage(
-                                        image:
-                                            AssetImage(ImageConstants.loginBg),
-                                        fit: BoxFit.cover)),
-                                child: Center(
-                                  child: Text(
-                                    'Raw materials',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: ColorConstants.whiteMain),
-                                  ),
-                                ),
-                              ),
-                            )),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.search_rounded,
-                    color: ColorConstants.greyMain.withOpacity(.5),
+                      ),
+                      Text(
+                        'Raw materials',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  hintText: 'Search',
-                  hintStyle:
-                      TextStyle(color: ColorConstants.greyMain, fontSize: 12),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(
-                          color: ColorConstants.greyMain.withOpacity(.1),
-                          width: 1))),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SummaryScreen(),
-                      ));
-                },
-                child: ListView.separated(
-                  itemBuilder: (context, index) => QuantityRowCard(),
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: 20, // Add space between TabBar and TabBarView
                   ),
-                  itemCount: 4,
-                ),
+                  SizedBox(
+                    height:
+                        300, // Set a height for TabBarView to avoid using Expanded
+                    child: TabBarView(
+                      children: [
+                        Productstab(),
+                        RawMaterialTab(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
