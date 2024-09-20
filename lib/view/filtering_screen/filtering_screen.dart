@@ -42,64 +42,29 @@ class _FilteringScreenState extends State<FilteringScreen> {
                     });
                   },
                   child: isSelected
-                      ? Container(
-                          height: 50,
-                          width: 175,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                  image: AssetImage(ImageConstants.loginBg),
-                                  fit: BoxFit.cover)),
-                          child: Center(
-                            child: Text(
-                              'Product',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorConstants.whiteMain),
+                      ? Expanded(
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                    image: AssetImage(ImageConstants.loginBg),
+                                    fit: BoxFit.cover)),
+                            child: Center(
+                              child: Text(
+                                'Product',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorConstants.whiteMain),
+                              ),
                             ),
                           ),
                         )
-                      : Container(
-                          height: 50,
-                          width: 175,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(1, 2), // changes position of shadow
-                              ),
-                            ],
-                            color: ColorConstants.whiteMain,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Product ',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorConstants.blackMain),
-                            ),
-                          ),
-                        ),
-                ),
-                Spacer(),
-                InkWell(
-                    onTap: () {
-                      setState(() {
-                        isnotSelected = false;
-                      });
-                    },
-                    child: isnotSelected
-                        ? Container(
+                      : Expanded(
+                          child: Container(
                             height: 50,
-                            width: 175,
                             decoration: BoxDecoration(
-                              color: ColorConstants.whiteMain,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
@@ -109,36 +74,78 @@ class _FilteringScreenState extends State<FilteringScreen> {
                                       1, 2), // changes position of shadow
                                 ),
                               ],
+                              color: ColorConstants.whiteMain,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Center(
                               child: Text(
-                                'Raw materials',
+                                'Product ',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     color: ColorConstants.blackMain),
                               ),
                             ),
-                          )
-                        : Container(
-                            height: 50,
-                            width: 175,
-                            decoration: BoxDecoration(
+                          ),
+                        ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isnotSelected = false;
+                        });
+                      },
+                      child: isnotSelected
+                          ? Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: ColorConstants.whiteMain,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        1, 2), // changes position of shadow
+                                  ),
+                                ],
                                 borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                    image: AssetImage(ImageConstants.loginBg),
-                                    fit: BoxFit.cover)),
-                            child: Center(
-                              child: Text(
-                                'Raw materials',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: ColorConstants.whiteMain),
                               ),
-                            ),
-                          ))
+                              child: Center(
+                                child: Text(
+                                  'Raw materials',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: ColorConstants.blackMain),
+                                ),
+                              ),
+                            )
+                          : Expanded(
+                              child: Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage(ImageConstants.loginBg),
+                                        fit: BoxFit.cover)),
+                                child: Center(
+                                  child: Text(
+                                    'Raw materials',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorConstants.whiteMain),
+                                  ),
+                                ),
+                              ),
+                            )),
+                )
               ],
             ),
             SizedBox(

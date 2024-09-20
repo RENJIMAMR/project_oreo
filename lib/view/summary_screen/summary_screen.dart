@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
 import 'package:project_oreo/view/success_screen/success_screen.dart';
@@ -13,6 +14,8 @@ class SummaryScreen extends StatelessWidget {
   final String materialName, batchNo, quantity;
   @override
   Widget build(BuildContext context) {
+    // var currentDate = DateTime.now();
+    // String formatedDate = DateFormat('dd/MM/yyyy');
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -80,14 +83,14 @@ class SummaryScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '11/09/2024',
+                          DateFormat('MM/dd/yyyy').format(DateTime.now()),
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: ColorConstants.blackMain),
                         ),
                         Text(
-                          DateTime.now(),
+                          DateFormat.j().format(DateTime.now()),
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
