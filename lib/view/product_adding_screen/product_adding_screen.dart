@@ -82,7 +82,9 @@ class _ProductAddingScreenState extends State<ProductAddingScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SummaryScreen(
-                      barcode: barcodeResult,
+                      batchNo: product?.batchNo ?? "",
+                      materialName: product?.name ?? '',
+                      quantity: product?.quantity ?? '',
                     ),
                   ));
             },

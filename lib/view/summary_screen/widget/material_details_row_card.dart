@@ -36,6 +36,7 @@ class MaterialDetailsRowCard extends StatelessWidget {
             ),
             Spacer(),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   materialName,
