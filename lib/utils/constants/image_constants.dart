@@ -17,4 +17,5 @@ class ImageConstants {
   static String bell = 'assets/asset_image/bell.png';
   static String protection = 'assets/asset_image/twofactor.png';
   static String logout = 'assets/asset_image/logout.png';
+  static String butter = 'assets/asset_image/butter.png';
 }

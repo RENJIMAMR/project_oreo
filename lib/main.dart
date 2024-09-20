@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:project_oreo/view/history_screen/history_screen.dart';
-import 'package:project_oreo/view/product_adding_screen/product_adding_screen.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:project_oreo/view/splash_screen/splash_screen.dart';
 
-Future<void> main(List<String> args) async {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Hive and provide a path for Hive boxes
+  final appDocumentDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+
   runApp(MyApp());
-  Hive.initFlutter();
-  var box = await Hive.openBox('productBox');
 }
 
 class MyApp extends StatelessWidget {
@@ -16,9 +18,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProductAddingScreen(),
-    );
+    return SplashScreen();
   }
 }
