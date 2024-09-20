@@ -208,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         BottomNavBarScreen()));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                backgroundColor: ColorConstants.redMain,
+                                backgroundColor: ColorConstants.pink,
                                 content: Text(
                                   'Invalid Crdentials',
                                   style: TextStyle(
