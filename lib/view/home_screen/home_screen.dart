@@ -1,10 +1,14 @@
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
+import 'package:project_oreo/provider/provider_class.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
+import 'package:project_oreo/view/bottom_nav_bar_screen/bottom_nav_bar_screen.dart';
 import 'package:project_oreo/view/filtering_screen/filtering_screen.dart';
 import 'package:project_oreo/view/home_screen/widgets/recent_row_card.dart';
+import 'package:project_oreo/view/product_adding_screen/product_adding_screen.dart';
 import 'package:project_oreo/view/scanning_screen/scanning_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -105,21 +109,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  ScanningScreen(barcode: barcodeResult),
+                                  ProductAddingScreen(barcode: barcodeResult),
                             ),
                           );
                           print(barcodeResult);
 
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    // Navigate to the next screen after a successful scan
-
-                                    ScanningScreen(
-                                  barcode: barcodeResult,
-                                ),
-                              ));
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  BottomNavBarScreen(selectedIndex: 1),
+                            ),
+                            (route) =>
+                                false, // This will clear the stack and take the user back to Home.
+                          );
                         }
                       },
                       child: Container(
@@ -151,12 +154,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                'Scanned 0',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: ColorConstants.greyMain),
+
+                              Consumer<ScanCounter>(
+                                builder: (context, counter, child) {
+                                  return Text(
+                                    'Scanned Items:${counter.scanCount}',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: ColorConstants.greyMain),
+                                  );
+                                },
                               ),
+                              // Text(
+                              //   'Scanned 0',
+                              //   style: TextStyle(
+                              //       fontSize: 15,
+                              //       color: ColorConstants.greyMain),
+                              // ),
                             ],
                           ),
                         ),

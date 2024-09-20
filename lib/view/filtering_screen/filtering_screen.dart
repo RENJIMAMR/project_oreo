@@ -12,6 +12,7 @@ class FilteringScreen extends StatefulWidget {
 }
 
 class _FilteringScreenState extends State<FilteringScreen> {
+  String barcodeResult = "Scan a barcode";
   bool isSelected = false; //to change bg of product and raw materials
   bool isnotSelected = true;
   @override
@@ -168,7 +169,9 @@ class _FilteringScreenState extends State<FilteringScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SummaryScreen(),
+                        builder: (context) => SummaryScreen(
+                          barcode: barcodeResult,
+                        ),
                       ));
                 },
                 child: ListView.separated(

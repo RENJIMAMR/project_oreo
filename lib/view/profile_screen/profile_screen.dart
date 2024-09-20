@@ -99,11 +99,14 @@ class ProfileScreen extends StatelessWidget {
               purpose: 'Further secure your account for safety',
               isSwitch: false,
             ),
-            ProfileRowcard(
-              bgImage: ImageConstants.logout,
-              title: 'Log out',
-              purpose: 'Further secure your account for safety',
-              isSwitch: false,
+            InkWell(
+              onTap: () {},
+              child: ProfileRowcard(
+                bgImage: ImageConstants.logout,
+                title: 'Log out',
+                purpose: 'Further secure your account for safety',
+                isSwitch: false,
+              ),
             ),
             Text(
               'More ',

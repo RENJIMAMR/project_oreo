@@ -1,9 +1,9 @@
-// lib/view/add_item_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
-
+import 'package:project_oreo/provider/provider_class.dart';
+import 'package:project_oreo/view/product_adding_screen/product_adding_screen.dart';
 import 'package:project_oreo/view/scanning_screen/scanning_screen.dart';
+import 'package:provider/provider.dart';
 
 class AddItemScreen extends StatefulWidget {
   const AddItemScreen({super.key});
@@ -13,34 +13,33 @@ class AddItemScreen extends StatefulWidget {
 }
 
 class _AddItemScreenState extends State<AddItemScreen> {
-  String barcodeResult = "Scan a barcode"; // Default message for the result
+  String barcodeResult = "Scan a barcode";
 
   @override
   void initState() {
     super.initState();
-    // Automatically call the barcode scanner when the screen loads
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scanBarcode();
     });
   }
 
-  // Method to scan barcode
   Future<void> scanBarcode() async {
     try {
-      var result = await BarcodeScanner.scan(); // Start the barcode scanner
+      var result = await BarcodeScanner.scan();
       setState(() {
-        barcodeResult = result.rawContent; // Store the result in state
+        barcodeResult = result.rawContent;
       });
 
-      // Navigate to the next screen after a successful scan
       if (barcodeResult.isNotEmpty) {
+        // Increment the counter when a scan is successful
+        Provider.of<ScanCounter>(context, listen: false).increment();
+
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ScanningScreen(barcode: barcodeResult),
+            builder: (context) => ProductAddingScreen(barcode: barcodeResult),
           ),
         );
-        print(barcodeResult);
       }
     } catch (e) {
       setState(() {
@@ -52,17 +51,12 @@ class _AddItemScreenState extends State<AddItemScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Item'),
-      ),
+      appBar: AppBar(title: const Text('Add Item')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              barcodeResult,
-              style: const TextStyle(fontSize: 16),
-            ),
+            Text(barcodeResult, style: const TextStyle(fontSize: 16)),
           ],
         ),
       ),

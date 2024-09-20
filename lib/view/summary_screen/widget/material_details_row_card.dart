@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 
 class MaterialDetailsRowCard extends StatelessWidget {
-  const MaterialDetailsRowCard({super.key});
-
+  const MaterialDetailsRowCard(
+      {super.key,
+      required this.materialName,
+      required this.batchNo,
+      required this.quantity});
+  final String materialName, batchNo, quantity;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,21 +38,21 @@ class MaterialDetailsRowCard extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  '..',
+                  materialName,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: ColorConstants.blackMain),
                 ),
                 Text(
-                  '..',
+                  batchNo,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: ColorConstants.blackMain),
                 ),
                 Text(
-                  '..',
+                  quantity,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,

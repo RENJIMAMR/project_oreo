@@ -4,8 +4,14 @@ import 'package:project_oreo/utils/constants/image_constants.dart';
 
 //row card for product increment screen
 class CountIncrementRowcard extends StatelessWidget {
-  const CountIncrementRowcard({super.key});
-
+  const CountIncrementRowcard(
+      {super.key,
+      required this.imageUrl,
+      required this.quantity,
+      required this.productName,
+      this.count = 1});
+  final String imageUrl, quantity, productName;
+  final int count;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +33,7 @@ class CountIncrementRowcard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-              ImageConstants.eggs,
+              imageUrl,
               fit: BoxFit.cover,
               height: 50,
               width: 50,
@@ -40,11 +46,11 @@ class CountIncrementRowcard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '200Kg',
+                quantity,
                 style: TextStyle(fontSize: 15, color: ColorConstants.greyMain),
               ),
               Text(
-                'Eggs',
+                productName,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
               ),
             ],
@@ -72,7 +78,7 @@ class CountIncrementRowcard extends StatelessWidget {
                     width: 8,
                   ),
                   Text(
-                    '1',
+                    count.toString(),
                     style: TextStyle(
                         fontSize: 25,
                         color: ColorConstants.blackMain,

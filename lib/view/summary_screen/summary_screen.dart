@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:project_oreo/model/product_model.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
+import 'package:project_oreo/view/dummydb.dart';
 import 'package:project_oreo/view/success_screen/success_screen.dart';
 import 'package:project_oreo/view/summary_screen/widget/material_details_row_card.dart';
 
 class SummaryScreen extends StatelessWidget {
-  const SummaryScreen({super.key});
-
+  SummaryScreen({super.key, required this.barcode});
+  final String barcode;
+  final Dummydb db = Dummydb(); // Create an instance of Dummydb
   @override
   Widget build(BuildContext context) {
+    // Assuming barcode is the product ID
+    final int productId = int.tryParse(barcode) ?? -1; // Convert barcode to int
+
+    Product? product;
+    try {
+      // Get the product based on the scanned barcode
+      product = db.getProductById(productId);
+    } catch (e) {
+      product = null; // Set product to null if not found
+    }
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -114,8 +127,12 @@ class SummaryScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListView.builder(
-                  itemCount: 8,
-                  itemBuilder: (context, index) => MaterialDetailsRowCard(),
+                  itemCount: 1,
+                  itemBuilder: (context, index) => MaterialDetailsRowCard(
+                    batchNo: product!.batchNo,
+                    materialName: product.name,
+                    quantity: product.quantity,
+                  ),
                 ),
               ),
             ),

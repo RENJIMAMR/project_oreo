@@ -1,19 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:project_oreo/model/product_model.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
+import 'package:project_oreo/view/dummydb.dart';
 import 'package:project_oreo/view/product_adding_screen/widgets/count_increment_rowCard.dart';
 import 'package:project_oreo/view/summary_screen/summary_screen.dart';
 
 class ProductAddingScreen extends StatefulWidget {
-  const ProductAddingScreen({super.key});
+  final String barcode;
+
+  ProductAddingScreen({super.key, required this.barcode});
 
   @override
   State<ProductAddingScreen> createState() => _ProductAddingScreenState();
 }
 
 class _ProductAddingScreenState extends State<ProductAddingScreen> {
+  String barcodeResult = "Scan a barcode";
+  final Dummydb db = Dummydb(); // Create an instance of Dummydb
   @override
   Widget build(BuildContext context) {
+    // Assuming barcode is the product ID
+    final int productId =
+        int.tryParse(widget.barcode) ?? -1; // Convert barcode to int
+
+    Product? product;
+    try {
+      // Get the product based on the scanned barcode
+      product = db.getProductById(productId);
+    } catch (e) {
+      product = null; // Set product to null if not found
+    }
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.all(12),
@@ -49,21 +66,24 @@ class _ProductAddingScreenState extends State<ProductAddingScreen> {
               ),
             ],
           ),
-          Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) => CountIncrementRowcard(),
-              separatorBuilder: (context, index) => SizedBox(
-                height: 20,
-              ),
-              itemCount: 4,
-            ),
-          ),
+          product != null
+              ? CountIncrementRowcard(
+                  imageUrl: product.imageUrl,
+                  productName: product.name,
+                  quantity: product.quantity,
+                  count: product.count,
+                )
+              : Center(
+                  child: Text('No product found for the scanned barcode.'),
+                ),
           InkWell(
             onTap: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SummaryScreen(),
+                    builder: (context) => SummaryScreen(
+                      barcode: barcodeResult,
+                    ),
                   ));
             },
             child: Container(

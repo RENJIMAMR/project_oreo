@@ -80,15 +80,17 @@ class SuccessScreen extends StatelessWidget {
                     height: 20,
                   ),
                   InkWell(
-                    //  onTap: () {
-                    //     Navigator.pushAndRemoveUntil(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => (),
-                    //       ),
-                    //       (route) => false,
-                    //     );
-                    //   },
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              BottomNavBarScreen(selectedIndex: 1),
+                        ),
+                        (route) =>
+                            false, // This will clear the stack and take the user back to Home.
+                      );
+                    },
                     child: Text(
                       'Add more',
                       style: TextStyle(

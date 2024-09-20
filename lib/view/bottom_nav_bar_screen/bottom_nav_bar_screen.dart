@@ -1,25 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
-import 'package:project_oreo/utils/constants/image_constants.dart';
 import 'package:project_oreo/view/add_item_screen/add_item_screen.dart';
 import 'package:project_oreo/view/home_screen/home_screen.dart';
 import 'package:project_oreo/view/profile_screen/profile_screen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
-  const BottomNavBarScreen({super.key});
+  final int selectedIndex;
+
+  const BottomNavBarScreen(
+      {super.key, this.selectedIndex = 0}); // Default index is 0
 
   @override
   State<BottomNavBarScreen> createState() => _BottomNavBarScreenState();
 }
 
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
-  int selectedIndex = 0;
-  List<Widget> myScreens = [HomeScreen(), AddItemScreen(), ProfileScreen()];
+  late int selectedIndex;
+
+  // Define the screens here
+  final List<Widget> myScreens = [
+    HomeScreen(),
+    AddItemScreen(),
+    ProfileScreen(),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.selectedIndex; // Initialize the selected index
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: myScreens[selectedIndex],
+      body: myScreens[selectedIndex], // Use the defined screens here
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         onTap: (value) {
