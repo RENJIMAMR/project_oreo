@@ -40,6 +40,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
             builder: (context) => ScanningScreen(barcode: barcodeResult),
           ),
         );
+        print(barcodeResult);
       }
     } catch (e) {
       setState(() {

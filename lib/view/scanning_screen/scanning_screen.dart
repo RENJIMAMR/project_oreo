@@ -28,7 +28,7 @@ class ScanningScreen extends StatelessWidget {
       ),
       body: product != null
           ? ListTile(
-              leading: Image.network(product.imageUrl,
+              leading: Image.asset(product.imageUrl,
                   width: 50, height: 50, fit: BoxFit.cover),
               title: Text(product.name),
               subtitle: Text('Count: ${product.count}'),
