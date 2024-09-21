@@ -37,7 +37,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProductAddingScreen(barcode: barcodeResult),
+            builder: (context) => ProductAddingScreen(
+              barcode: barcodeResult,
+            ),
           ),
         );
       }

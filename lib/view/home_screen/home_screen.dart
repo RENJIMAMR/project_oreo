@@ -108,8 +108,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  ProductAddingScreen(barcode: barcodeResult),
+                              builder: (context) => ProductAddingScreen(
+                                barcode: barcodeResult,
+                              ),
                             ),
                           );
                           print(barcodeResult);

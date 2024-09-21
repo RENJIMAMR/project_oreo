@@ -34,7 +34,9 @@ class Productstab extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SummaryScreen(),
+                    builder: (context) => SummaryScreen(
+                      products: [],
+                    ),
                   ));
             },
             child: ListView.separated(
