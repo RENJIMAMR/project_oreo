@@ -5,7 +5,7 @@ class Product {
   final String quantity;
   final String batchNo;
 
-  final int count;
+  int count;
 
   Product(
       {required this.id,

@@ -1,10 +1,12 @@
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
-import 'package:project_oreo/provider/provider_class.dart';
+import 'package:project_oreo/controller/scan_controller.dart';
+
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
 import 'package:project_oreo/view/bottom_nav_bar_screen/bottom_nav_bar_screen.dart';
 import 'package:project_oreo/view/filtering_screen/filtering_screen.dart';
+import 'package:project_oreo/view/history_screen/history_screen.dart';
 import 'package:project_oreo/view/home_screen/widgets/recent_row_card.dart';
 import 'package:project_oreo/view/product_adding_screen/product_adding_screen.dart';
 import 'package:project_oreo/view/scanning_screen/scanning_screen.dart';
@@ -156,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
 
-                              Consumer<ScanCounter>(
+                              Consumer<ScanController>(
                                 builder: (context, counter, child) {
                                   return Text(
                                     'Scanned Items:${counter.scanCount}',
@@ -243,9 +245,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  Text(
-                    'More',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HistoryScreen(),
+                          ));
+                    },
+                    child: Text(
+                      'More',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),

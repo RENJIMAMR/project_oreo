@@ -3,8 +3,6 @@ import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
 import 'package:project_oreo/view/filtering_screen/tabs/productstab.dart';
 import 'package:project_oreo/view/filtering_screen/tabs/raw_materialtab.dart';
-import 'package:project_oreo/view/filtering_screen/widget/quantity_row_card.dart';
-import 'package:project_oreo/view/summary_screen/summary_screen.dart';
 
 class FilteringScreen extends StatefulWidget {
   const FilteringScreen({super.key});
@@ -13,9 +11,26 @@ class FilteringScreen extends StatefulWidget {
   State<FilteringScreen> createState() => _FilteringScreenState();
 }
 
-class _FilteringScreenState extends State<FilteringScreen> {
-  bool isSelected = false; //to change bg of product and raw materials
-  bool isnotSelected = true;
+class _FilteringScreenState extends State<FilteringScreen>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+
+    // Listen for tab changes to update the UI
+    _tabController.addListener(() {
+      setState(() {}); // Trigger UI update on tab change
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +40,14 @@ class _FilteringScreenState extends State<FilteringScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Image.asset(
               ImageConstants.loginOreo,
               height: 50,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             DefaultTabController(
@@ -40,33 +55,88 @@ class _FilteringScreenState extends State<FilteringScreen> {
               child: Column(
                 children: [
                   TabBar(
-                    labelColor: ColorConstants.blackMain,
-                    indicatorColor: ColorConstants.blackMain,
-                    indicatorSize: TabBarIndicatorSize.label,
+                    controller: _tabController, // Use the tab controller
+                    labelPadding: EdgeInsets.zero,
+                    indicator: BoxDecoration(
+                      color: ColorConstants.whiteMain,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    unselectedLabelColor: ColorConstants.whiteMain,
                     tabs: [
-                      Text(
-                        'Products',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Tab(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: ColorConstants.whiteMain,
+                                borderRadius: BorderRadius.circular(15),
+                                image: _tabController.index == 0
+                                    ? DecorationImage(
+                                        image:
+                                            AssetImage(ImageConstants.loginBg),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null //to Change background dynamically
+                                ),
+                            child: Center(
+                              child: Text(
+                                'Products',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: _tabController.index == 0
+                                      ? ColorConstants.whiteMain
+                                      : ColorConstants
+                                          .blueMain, //to Change text color dynamically
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      Text(
-                        'Raw materials',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Tab(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: ColorConstants.whiteMain,
+                                borderRadius: BorderRadius.circular(15),
+                                image: _tabController.index == 1
+                                    ? DecorationImage(
+                                        image:
+                                            AssetImage(ImageConstants.loginBg),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null //to Change background dynamically
+                                ),
+                            child: Center(
+                              child: Text(
+                                'Raw materials',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: _tabController.index == 1
+                                      ? ColorConstants.whiteMain
+                                      : ColorConstants
+                                          .blueMain, //to Change text color dynamically
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20, // Add space between TabBar and TabBarView
+                  const SizedBox(
+                    height: 20, // space between TabBar and TabBarView
                   ),
                   SizedBox(
                     height:
-                        300, // Set a height for TabBarView to avoid using Expanded
+                        400, //  height for TabBarView to avoid using Expanded
                     child: TabBarView(
+                      controller: _tabController,
                       children: [
                         Productstab(),
                         RawMaterialTab(),

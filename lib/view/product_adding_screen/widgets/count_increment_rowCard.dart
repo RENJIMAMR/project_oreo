@@ -9,9 +9,13 @@ class CountIncrementRowcard extends StatelessWidget {
       required this.imageUrl,
       required this.quantity,
       required this.productName,
-      this.count = 1});
+      this.count = 1,
+      this.onIncrement,
+      this.onDecrement});
   final String imageUrl, quantity, productName;
   final int count;
+  final VoidCallback? onIncrement;
+  final VoidCallback? onDecrement;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,7 +71,7 @@ class CountIncrementRowcard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: onDecrement,
                     child: Icon(
                       Icons.remove,
                       color: ColorConstants.blueMain,
@@ -88,7 +92,7 @@ class CountIncrementRowcard extends StatelessWidget {
                     width: 8,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: onIncrement,
                     child: Icon(
                       Icons.add,
                       color: ColorConstants.blueMain,
