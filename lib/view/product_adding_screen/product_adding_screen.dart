@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_oreo/controller/item_count_controller.dart';
+import 'package:project_oreo/controller/scan_controller.dart';
 import 'package:project_oreo/model/product_model.dart';
 import 'package:project_oreo/utils/constants/color_constants.dart';
 import 'package:project_oreo/utils/constants/image_constants.dart';
@@ -20,8 +21,7 @@ class ProductAddingScreen extends StatefulWidget {
 
 class _ProductAddingScreenState extends State<ProductAddingScreen> {
   String barcodeResult = "Scan a barcode";
-  final Dummydb db = Dummydb(); // Create an instance of Dummydb
-  List<Product> selectedProducts = [];
+
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) async {
@@ -38,13 +38,13 @@ class _ProductAddingScreenState extends State<ProductAddingScreen> {
     final int productId =
         int.tryParse(widget.barcode) ?? -1; // Convert barcode to int
 
-    Product? product;
+    ProductModel? product;
     try {
       // Get the product based on the scanned barcode
-      product = db.getProductById(productId);
-      if (product != null && !selectedProducts.contains(product)) {
-        selectedProducts.add(product);
-      }
+      // product = db.getProductById(productId);
+      // if (product != null && !selectedProducts.contains(product)) {
+      //   selectedProducts.add(product);
+      // }
     } catch (e) {
       product = null; // Set product to null if not found
     }
@@ -53,8 +53,8 @@ class _ProductAddingScreenState extends State<ProductAddingScreen> {
         body: Padding(
       padding: const EdgeInsets.all(12),
       child: SingleChildScrollView(
-        child:
-            Consumer<ItemCountController>(builder: (context, countProv, child) {
+        child: Consumer<ScanController>(
+            builder: (context, scannerProvider, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -100,27 +100,23 @@ class _ProductAddingScreenState extends State<ProductAddingScreen> {
                   ),
                 ],
               ),
-              product != null
+              scannerProvider.scannedItems.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
-                      itemCount: countProv.keys.length,
+                      itemCount: scannerProvider.scannedItems.length,
                       itemBuilder: (context, index) {
-                        final cartItem =
-                            countProv.getCurrentItem(countProv.keys[index]);
-                        CountIncrementRowcard(
-                          imageUrl: cartItem?.imageUrl ?? '',
-                          productName: cartItem?.name ?? '',
-                          quantity: cartItem?.quantity ?? '',
-                          count: cartItem?.count ?? 0,
-                          onDecrement: () {
-                            context
-                                .read<ItemCountController>()
-                                .decrementQty(countProv.keys[index]);
-                          },
-                          onIncrement: context
-                              .read<ItemCountController>()
-                              .incrementQty(countProv.keys[index]),
-                        );
+                        final listItem = scannerProvider.scannedItems[index];
+                        return CountIncrementRowcard(
+                            imageUrl: listItem?.imageUrl ?? '',
+                            productName: listItem?.name ?? '',
+                            quantity: listItem?.quantity ?? '',
+                            count: listItem?.count ?? 0,
+                            onDecrement: () {
+                              // context
+                              //     .read<ItemCountController>()
+                              //     .decrementQty(countProv.keys[index]);
+                            },
+                            onIncrement: () {});
                       })
                   : Center(
                       child: Text('No product found for the scanned barcode.'),
@@ -131,7 +127,7 @@ class _ProductAddingScreenState extends State<ProductAddingScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => SummaryScreen(
-                          products: selectedProducts,
+                          products: scannerProvider.scannedItems,
                         ),
                       ));
                 },

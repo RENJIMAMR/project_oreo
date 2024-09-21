@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:project_oreo/controller/scan_controller.dart';
 
 import 'package:project_oreo/view/product_adding_screen/product_adding_screen.dart';
-import 'package:project_oreo/view/scanning_screen/scanning_screen.dart';
+
 import 'package:provider/provider.dart';
 
 class AddItemScreen extends StatefulWidget {
@@ -33,7 +35,12 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
       if (barcodeResult.isNotEmpty) {
         // Increment the counter when a scan is successful
-        Provider.of<ScanController>(context, listen: false).increment();
+        Provider.of<ScanController>(context, listen: false)
+            .addScannedItemToBag(int.parse(barcodeResult.toString()));
+        log(Provider.of<ScanController>(context, listen: false)
+            .scannedItems
+            .length
+            .toString());
 
         Navigator.push(
           context,

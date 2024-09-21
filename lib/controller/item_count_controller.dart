@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:project_oreo/model/product_model.dart';
 
 class ItemCountController with ChangeNotifier {
-  final countBox = Hive.box<Product>('countBox');
+  final countBox = Hive.box<ProductModel>('countBox');
   List keys = [];
   Future<void> addToCart({
     required int id,
@@ -24,7 +24,7 @@ class ItemCountController with ChangeNotifier {
     }
     if (alreadyInCart == false) {
       await countBox.add(
-        Product(
+        ProductModel(
             batchNo: batchNo!,
             id: id,
             count: count!,
@@ -45,7 +45,7 @@ class ItemCountController with ChangeNotifier {
   }
 
 //for getting the current item
-  Product? getCurrentItem(var key) {
+  ProductModel? getCurrentItem(var key) {
     final currentItem = countBox.get(key);
     return currentItem;
   }
@@ -54,7 +54,7 @@ class ItemCountController with ChangeNotifier {
     final currentItem = countBox.get(key);
     countBox.put(
         key,
-        Product(
+        ProductModel(
           batchNo: currentItem!.batchNo,
           count: ++currentItem!.count,
           id: currentItem!.id,
@@ -70,7 +70,7 @@ class ItemCountController with ChangeNotifier {
     if (currentItem!.count >= 2) {
       countBox.put(
           key,
-          Product(
+          ProductModel(
             batchNo: currentItem!.batchNo,
             count: --currentItem!.count,
             id: currentItem!.id,

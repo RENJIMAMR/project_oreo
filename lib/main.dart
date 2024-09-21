@@ -4,6 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:project_oreo/controller/item_count_controller.dart';
 import 'package:project_oreo/controller/scan_controller.dart';
+import 'package:project_oreo/controller/summary_controller.dart';
 import 'package:project_oreo/model/product_model.dart';
 import 'package:project_oreo/view/product_adding_screen/widgets/count_increment_rowCard.dart';
 
@@ -15,7 +16,7 @@ Future<void> main() async {
   await Hive.initFlutter();
 
   // var box = await Hive.openBox<>('bagBox');
-  var box2 = await Hive.openBox<Product>('countBox');
+  var box2 = await Hive.openBox<ProductModel>('countBox');
 
   runApp(
     MyApp(),
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => ItemCountController(),
           ),
+          ChangeNotifierProvider(
+            create: (context) => SummaryController(),
+          )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -9,7 +9,7 @@ import 'package:project_oreo/view/filtering_screen/filtering_screen.dart';
 import 'package:project_oreo/view/history_screen/history_screen.dart';
 import 'package:project_oreo/view/home_screen/widgets/recent_row_card.dart';
 import 'package:project_oreo/view/product_adding_screen/product_adding_screen.dart';
-import 'package:project_oreo/view/scanning_screen/scanning_screen.dart';
+
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {

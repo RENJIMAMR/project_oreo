@@ -157,7 +157,7 @@ import 'package:project_oreo/view/summary_screen/widget/material_details_row_car
 // }
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({super.key, required this.products});
-  final List<Product> products;
+  final List<ProductModel> products;
 
   @override
   Widget build(BuildContext context) {
@@ -187,31 +187,33 @@ class SummaryScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Container(
-              padding: EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                color: ColorConstants.whiteMain,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: Offset(1, 2), // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: ListView.builder(
-                shrinkWrap: true, // Adjust ListView size based on content
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  final product = products[index];
-                  return MaterialDetailsRowCard(
-                    batchNo: product.batchNo,
-                    materialName: product.name,
-                    quantity: product.quantity,
-                  );
-                },
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(13),
+                decoration: BoxDecoration(
+                  color: ColorConstants.whiteMain,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(1, 2), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true, // Adjust ListView size based on content
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return MaterialDetailsRowCard(
+                      batchNo: product.batchNo,
+                      materialName: product.name,
+                      quantity: product.quantity,
+                    );
+                  },
+                ),
               ),
             ),
             InkWell(
